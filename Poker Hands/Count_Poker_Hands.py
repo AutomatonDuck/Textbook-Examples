@@ -1,13 +1,15 @@
 #this program will count the diffrent combinations of poker hands from a data_file and return the probability
 
 #open data_file
-try:
-    poker_file = open("poker-hand-testing.csv", 'r')
-except FileNotFoundError:
-    print("File was not found, Ensure that the file is in the current directory")
-    print("or enter the entire path of the file")
-    print("Exiting with error code 1")
-    exit(1)
+file_str = input("Enter file name: ")
+while True:
+    try:
+        poker_file = open(file_str,'r')
+        break #success, program will continue
+    except IOError:
+        print("Error: Cannot open file: ", file_str)
+        file_str = input("Enter file name: ")
+
 
 total_count = 0 #variable to hold total count of all hands
 pair_count = 0 #variable to hold total count of pairs
@@ -29,3 +31,4 @@ for line_str in poker_file:
 
 print("Total hands on file:", total_count)
 print("Count of pair hands: ", pair_count)
+print("Probability of pair:  {:>9.4%}".format(pair_count/total_count))
